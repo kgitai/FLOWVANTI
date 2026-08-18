@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flow — Design Reference (do not ship this file, reference only)</title>
+<style>
+  @font-face { font-family: Inter; src: url("fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: Inter; src: url("fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: Inter; src: url("fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+  :root{
+    --bg: #FFFFFF;
+    --surface-1: #F7F7F5;
+    --surface-2: #FFFFFF;
+    --border: #E4E3DD;
+    --border-strong: #D3D1C7;
+    --text-primary: #1A1A18;
+    --text-secondary: #5F5E5A;
+    --text-muted: #98978F;
+    --accent: #378ADD;
+    --accent-bg: #E6F1FB;
+    --accent-text: #0C447C;
+    --danger: #E24B4A;
+    --danger-bg: #FCEBEB;
+    --danger-text: #791F1F;
+    --warning: #EF9F27;
+    --warning-bg: #FAEEDA;
+    --warning-text: #633806;
+    --success: #63A46C;
+    --success-bg: #EAF3DE;
+    --success-text: #27500A;
+    --project-purple: #7F77DD;
+    --project-purple-bg: #EEEDFE;
+    --project-purple-text: #26215C;
+    --project-teal: #1D9E75;
+    --project-teal-bg: #E1F5EE;
+    --project-teal-text: #085041;
+    --project-coral: #D85A30;
+    --project-coral-bg: #FAECE7;
+    --project-coral-text: #712B13;
+    --radius-control: 8px;
+    --radius-card: 12px;
+    --brand-accent: #4F46E5;
+  }
+  *{ box-sizing:border-box; }
+  body{ font-family:'Inter',sans-serif; background:#EDEDEA; margin:0; padding:40px 24px; color:var(--text-primary); }
+  h1.doc-title{ font-size:20px; font-weight:600; margin:0 0 6px; }
+  p.doc-sub{ font-size:13px; color:var(--text-secondary); margin:0 0 32px; max-width:640px; line-height:1.5; }
+  .section-label{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-secondary); margin:40px 0 12px; }
+  .frame{ border:0.5px solid var(--border); border-radius:12px; overflow:hidden; background:var(--surface-2); max-width:820px; }
+  .swatch-row{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:8px; }
+  .swatch{ width:120px; border-radius:8px; overflow:hidden; border:0.5px solid var(--border); font-size:11px; }
+  .swatch .fill{ height:44px; }
+  .swatch .label{ padding:6px 8px; background:var(--surface-2); }
+  .swatch .label b{ display:block; font-size:11px; }
+  .swatch .label span{ color:var(--text-muted); font-size:10px; }
+
+  .app-shell{ display:flex; font-size:13px; }
+  .sidebar{ width:168px; background:var(--surface-1); border-right:0.5px solid var(--border); display:flex; flex-direction:column; padding:12px 10px; flex-shrink:0; }
+  .brand{ display:flex; align-items:center; gap:8px; padding:4px 6px 14px; }
+  .brand .mark{ width:22px; height:22px; border-radius:6px; background:var(--brand-accent); }
+  .brand .name{ font-size:14px; font-weight:500; }
+  .nav-label{ font-size:11px; color:var(--text-muted); padding:0 6px 6px; }
+  .nav-item{ display:flex; align-items:center; gap:8px; padding:6px; border-radius:var(--radius-control); font-size:13px; color:var(--text-secondary); }
+  .nav-item.active{ background:#EFEFEC; color:var(--text-primary); }
+  .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .main{ flex:1; min-width:0; display:flex; flex-direction:column; }
+  .topbar{ display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:0.5px solid var(--border); }
+  .crumb{ font-size:14px; font-weight:500; }
+  .crumb-sub{ font-size:12px; color:var(--text-muted); }
+  .pill{ font-size:10px; padding:2px 7px; border-radius:8px; display:inline-block; }
+  .avatar{ width:18px; height:18px; border-radius:50%; background:var(--accent-bg); color:var(--accent-text); font-size:9px; display:flex; align-items:center; justify-content:center; }
+</style>
+</head>
+<body>
+
+<h1 class="doc-title">Flow — design reference</h1>
+<p class="doc-sub">Rebuilt with literal CSS values (no external design-system dependency) so this file can be opened directly, screenshotted, or read as source by a coding assistant. Pair with DESIGN.md for the written rules behind these choices.</p>
+
+<div class="section-label">Color tokens</div>
+<div class="swatch-row">
+  <div class="swatch"><div class="fill" style="background:var(--accent-bg)"></div><div class="label"><b>accent</b><span>#378ADD</span></div></div>
+  <div class="swatch"><div class="fill" style="background:var(--danger-bg)"></div><div class="label"><b>danger</b><span>#E24B4A</span></div></div>
+  <div class="swatch"><div class="fill" style="background:var(--warning-bg)"></div><div class="label"><b>warning</b><span>#EF9F27</span></div></div>
+  <div class="swatch"><div class="fill" style="background:var(--success-bg)"></div><div class="label"><b>success</b><span>#63A46C</span></div></div>
+</div>
+<div class="swatch-row">
+  <div class="swatch"><div class="fill" style="background:var(--project-purple-bg)"></div><div class="label"><b>project · purple</b><span>#7F77DD</span></div></div>
+  <div class="swatch"><div class="fill" style="background:var(--project-teal-bg)"></div><div class="label"><b>project · teal</b><span>#1D9E75</span></div></div>
+  <div class="swatch"><div class="fill" style="background:var(--project-coral-bg)"></div><div class="label"><b>project · coral</b><span>#D85A30</span></div></div>
+  <div class="swatch"><div class="fill" style="background:var(--surface-1)"></div><div class="label"><b>surface-1</b><span>#F7F7F5</span></div></div>
+</div>
+
+<div class="section-label">View 1 — Board (Kanban)</div>
+<div class="frame">
+  <div class="app-shell" style="height:400px;">
+    <div class="sidebar">
+      <div class="brand"><div class="mark"></div><span class="name">Flow</span></div>
+      <div class="nav-label">Projects</div>
+      <div class="nav-item active"><span class="dot" style="background:var(--project-purple)"></span>Website relaunch</div>
+      <div class="nav-item"><span class="dot" style="background:var(--project-teal)"></span>Mobile app v2</div>
+      <div class="nav-item"><span class="dot" style="background:var(--project-coral)"></span>Q3 marketing</div>
+    </div>
+    <div class="main">
+      <div class="topbar"><span class="crumb">Website relaunch</span><span class="crumb-sub">/ Board</span></div>
+      <div style="display:flex; gap:10px; padding:12px 14px; flex:1;">
+        <div style="flex:1;">
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:8px;">To do</div>
+          <div style="background:var(--surface-2); border:0.5px solid var(--border); border-radius:var(--radius-control); padding:8px; margin-bottom:8px;">
+            <div style="font-size:12px; margin-bottom:8px;">Design new pricing page</div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="pill" style="background:var(--danger-bg); color:var(--danger-text);">High</span>
+              <div class="avatar">JL</div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:8px;">In progress</div>
+          <div style="background:var(--surface-2); border:2px solid var(--accent); border-radius:var(--radius-control); padding:8px;">
+            <div style="font-size:12px; margin-bottom:8px;">QA on checkout flow</div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="pill" style="background:var(--danger-bg); color:var(--danger-text);">Urgent</span>
+              <div class="avatar">SK</div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:8px;">Done</div>
+          <div style="background:var(--surface-2); border:0.5px solid var(--border); border-radius:var(--radius-control); padding:8px; opacity:0.7;">
+            <div style="font-size:12px; text-decoration:line-through; margin-bottom:8px;">Set up staging server</div>
+            <span class="pill" style="background:var(--success-bg); color:var(--success-text);">Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label">Component anatomy notes</div>
+<div class="frame" style="padding:18px 20px; font-size:12.5px; color:var(--text-secondary); line-height:1.7;">
+  <b style="color:var(--text-primary); display:block; margin-bottom:6px;">Sidebar</b>
+  168–220px fixed width, --surface-1 background, 0.5px right border. Project rows: 8px colored dot + label, 8px border-radius on hover/active state, active state uses a flat #EFEFEC fill (no border, no shadow).
+  <br><br>
+  <b style="color:var(--text-primary); display:block; margin-bottom:6px;">Kanban card</b>
+  White surface, 0.5px border (2px accent border only for a highlighted/blocked card — this is the one deliberate exception to the 0.5px rule), 8px radius, 8px internal padding. Title 12px regular. Footer row: priority pill left, assignee avatar right, space-between.
+  <br><br>
+  <b style="color:var(--text-primary); display:block; margin-bottom:6px;">Pills / badges</b>
+  8px border-radius (soft rounded, not a full pill), 10px font, colored background at the "-bg" token with matching "-text" token — never black text on a colored background.
+  <br><br>
+  <b style="color:var(--text-primary); display:block; margin-bottom:6px;">Color rule — the one thing to enforce everywhere</b>
+  Two separate color systems that must never cross: <b>project identity</b> (purple/teal/coral — sidebar dots, calendar tags, gantt bars) tells you <i>which project</i>; <b>semantic status</i> (red/amber/green) tells you <i>urgency or state</i> (priority pills, notifications, overdue markers). A task card's priority pill is never colored by its project, and a project dot is never colored by urgency.
+</div>
+
+</body>
+</html>

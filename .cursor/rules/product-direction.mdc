@@ -1,0 +1,30 @@
+---
+description: FLOWVANTI product direction, free tools only, HTML UI source of truth
+alwaysApply: true
+---
+
+# FLOWVANTI product direction
+
+Desktop app (Electron + React + JS). Visual spec is `dashboard.html` plus `DESIGN.md`. Implement the UI in `src/` (JSX + the same CSS and logic). Do not restyle with another kit.
+
+## Planned surfaces
+
+- Email (IMAP/SMTP first; vendor APIs optional later)
+- Office files (open formats + optional Google/Microsoft connectors)
+- AI copilot rail (local models; not a paid AI product UI)
+- User-built dashboards from widgets — no design tool for end users
+- Project chat, stored per project (own store; no Stream/Sendbird)
+
+## Tools: non-subscription only
+
+Allowed: **Penpot** (design), **Inkscape**, **Lucide** icons, **Electron**, **React** + **Vite** (MIT), **react-grid-layout**, **Ollama** (local AI), bundled **Inter** (OFL).
+
+Forbidden: Figma, Framer, Adobe XD/CC, Sketch, Canva, Webflow, Tokens Studio Pro, Anima/Locofy/v0, Stream, Auth0/Clerk, and any paid UI kit or SaaS required to run the app.
+
+Design the widget catalog in Penpot (or in HTML). End users never need a design tool.
+
+## Build implications
+
+- Implement UI in React + JS (`src/App.jsx`, `src/FlowUi.jsx`, `src/flow.js`) matching `dashboard.html` pixels and production logic.
+- Future dashboards: widget grid, persist per user + project.
+- Chat, mail, Office, AI are panes/widgets — not separate products.

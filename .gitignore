@@ -1,0 +1,22 @@
+node_modules/
+dist/
+dist-ui/
+release/
+build/FLOWVANTI/
+certs/
+*.pfx
+*.p12
+*.pem
+*.key
+*.csr
+.env
+.env.*
+*.crdownload
+*.exe
+*.blockmap
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+from claude.zip
+FLOWVANTI.spec
