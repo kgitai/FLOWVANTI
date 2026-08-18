@@ -6,9 +6,13 @@ This project uses the [SignPath Foundation](https://signpath.org/) for code sign
 
 ## Download
 
-Windows installer: [GitHub Releases](https://github.com/kgitai/FLOWVANTI/releases) (or clone this repository and run `npm run dist`).
+Windows installer (direct):
 
-The published Windows binaries are signed with a certificate from the SignPath Foundation.
+https://github.com/kgitai/FLOWVANTI/releases/latest/download/flowvanti_x64.exe
+
+Releases page: [https://github.com/kgitai/FLOWVANTI/releases](https://github.com/kgitai/FLOWVANTI/releases)
+
+The published Windows binaries are intended to be signed with a certificate from the SignPath Foundation.
 
 ## Privacy
 

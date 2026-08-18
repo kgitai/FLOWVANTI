@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, Menu, shell } = require("electron");
+const { spawn } = require("child_process");
 const crypto = require("crypto");
 const fs = require("fs");
 const os = require("os");
@@ -117,6 +118,25 @@ ipcMain.handle("get_attachment", async (_event, id) => {
   } catch (err) {
     return null;
   }
+});
+
+function uninstallerPath() {
+  if (!app.isPackaged) return "";
+  const exe = path.join(path.dirname(process.execPath), "Uninstall FLOWVANTI.exe");
+  return fs.existsSync(exe) ? exe : "";
+}
+
+ipcMain.handle("uninstall_app", async () => {
+  const uninst = uninstallerPath();
+  if (uninst) {
+    spawn(uninst, [], { detached: true, stdio: "ignore" }).unref();
+    setTimeout(() => app.quit(), 400);
+    return { ok: true };
+  }
+  try {
+    await shell.openExternal("ms-settings:appsfeatures");
+  } catch (err) {}
+  return { ok: false, openedSettings: true };
 });
 
 ipcMain.handle("delete_attachment", async (_event, id) => {

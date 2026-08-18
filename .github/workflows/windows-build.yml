@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -46,3 +46,18 @@ jobs:
           path: release/flowvanti_x64.exe
           if-no-files-found: error
           retention-days: 14
+
+      - name: Publish GitHub Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: FLOWVANTI 1.0.0
+          files: release/flowvanti_x64.exe
+          make_latest: true
+          body: |
+            Windows x64 installer (`flowvanti_x64.exe`).
+
+            Direct download: https://github.com/kgitai/FLOWVANTI/releases/latest/download/flowvanti_x64.exe
+
+            This project uses the SignPath Foundation for code signing.
