@@ -6,7 +6,6 @@ const api = {
   put_attachment: (id, bytes) => ipcRenderer.invoke("put_attachment", id, bytes),
   get_attachment: (id) => ipcRenderer.invoke("get_attachment", id),
   delete_attachment: (id) => ipcRenderer.invoke("delete_attachment", id),
-  uninstall_app: () => ipcRenderer.invoke("uninstall_app"),
 };
 
 contextBridge.exposeInMainWorld("pywebview", { api });

@@ -120,25 +120,6 @@ ipcMain.handle("get_attachment", async (_event, id) => {
   }
 });
 
-function uninstallerPath() {
-  if (!app.isPackaged) return "";
-  const exe = path.join(path.dirname(process.execPath), "Uninstall FLOWVANTI.exe");
-  return fs.existsSync(exe) ? exe : "";
-}
-
-ipcMain.handle("uninstall_app", async () => {
-  const uninst = uninstallerPath();
-  if (uninst) {
-    spawn(uninst, [], { detached: true, stdio: "ignore" }).unref();
-    setTimeout(() => app.quit(), 400);
-    return { ok: true };
-  }
-  try {
-    await shell.openExternal("ms-settings:appsfeatures");
-  } catch (err) {}
-  return { ok: false, openedSettings: true };
-});
-
 ipcMain.handle("delete_attachment", async (_event, id) => {
   try {
     const safe = safeAttachId(id);
@@ -150,6 +131,23 @@ ipcMain.handle("delete_attachment", async (_event, id) => {
     return false;
   }
 });
+
+function packagedUninstaller() {
+  if (!app.isPackaged) return "";
+  const dir = path.dirname(process.execPath);
+  for (const name of ["uninstall.exe", "Uninstall FLOWVANTI.exe"]) {
+    const exe = path.join(dir, name);
+    if (fs.existsSync(exe)) return exe;
+  }
+  return "";
+}
+
+function launchUninstaller() {
+  const uninst = packagedUninstaller();
+  if (!uninst) return false;
+  spawn(uninst, [], { detached: true, stdio: "ignore" }).unref();
+  return true;
+}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -193,7 +191,27 @@ function createWindow() {
   win.loadFile(fs.existsSync(ui) ? ui : fallback);
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  if (process.argv.includes("--uninstall")) {
+    launchUninstaller();
+    app.quit();
+    return;
+  }
+  const uninst = packagedUninstaller();
+  if (uninst) {
+    app.setUserTasks([
+      {
+        program: uninst,
+        arguments: "",
+        title: "uninstall.exe",
+        description: "Remove FLOWVANTI from this PC",
+        iconPath: uninst,
+        iconIndex: 0,
+      },
+    ]);
+  }
+  createWindow();
+});
 app.on("window-all-closed", () => app.quit());
 app.on("web-contents-created", (_event, contents) => {
   contents.on("will-attach-webview", (event) => event.preventDefault());

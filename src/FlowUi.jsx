@@ -595,10 +595,6 @@ export default function FlowUi() {
                       <button className="btn btn-ghost btn-sm" type="button" id="deleteSampleBtn" data-tip="Remove all demo projects and tasks">Delete Sample</button>
                     </div>
                   </div>
-                  <div className="set-row">
-                    <div><b>Uninstall FLOWVANTI</b><span className="set-desc">Remove the app from this PC · also in Windows Settings → Apps</span></div>
-                    <button className="btn btn-ghost btn-sm" type="button" id="uninstallAppBtn" data-tip="Open the Windows uninstaller">Uninstall</button>
-                  </div>
                 </div>
               </section>
             </div>

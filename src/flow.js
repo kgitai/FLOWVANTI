@@ -8075,19 +8075,6 @@ const SESSION_KEY = "flow.signedIn";
   document.getElementById("forgotBack").addEventListener("click", (e) => { e.preventDefault(); showAuth("login"); });
   document.getElementById("loadSampleBtn").addEventListener("click", () => { loadSample(); });
   document.getElementById("deleteSampleBtn").addEventListener("click", () => { deleteSample(); });
-  const uninstallAppBtn = document.getElementById("uninstallAppBtn");
-  if (uninstallAppBtn) {
-    uninstallAppBtn.addEventListener("click", async () => {
-      const api = desktopApi();
-      if (api && typeof api.uninstall_app === "function") {
-        const res = await api.uninstall_app();
-        if (res && res.ok) return;
-        toast("Windows Settings → Apps → FLOWVANTI → Uninstall");
-        return;
-      }
-      toast("Windows Settings → Apps → FLOWVANTI → Uninstall");
-    });
-  }
   const calPrev = document.getElementById("calPrev");
   const calNext = document.getElementById("calNext");
   const calTodayBtn = document.getElementById("calTodayBtn");
