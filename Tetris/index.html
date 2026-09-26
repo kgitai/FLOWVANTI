@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>Tetris</h1>
+      <button id="sound" class="ghost-btn" type="button" aria-pressed="true">Sound on</button>
+    </header>
+    <div class="layout">
+      <section class="panel" aria-label="Hold">
+        <h2>Hold</h2>
+        <canvas id="hold" width="72" height="72"></canvas>
+      </section>
+      <div class="well">
+        <canvas id="board" width="300" height="600"></canvas>
+        <div class="overlay" id="overlay">
+          <h2 id="overlay-title">Tetris</h2>
+          <p id="overlay-text">Clear complete lines. The stack ends the game when a new piece no longer fits.</p>
+          <button id="overlay-btn" type="button">Start</button>
+        </div>
+      </div>
+      <section class="panel" aria-label="Next and score">
+        <h2>Next</h2>
+        <canvas id="next" width="72" height="392"></canvas>
+        <dl class="stats">
+          <dt>Score</dt><dd id="score">0</dd>
+          <dt>Lines</dt><dd id="lines">0</dd>
+          <dt>Level</dt><dd id="level">1</dd>
+          <dt>Best</dt><dd id="best">0</dd>
+        </dl>
+      </section>
+    </div>
+    <div class="pad" aria-label="Touch controls">
+      <button type="button" data-act="left">Left</button>
+      <button type="button" data-act="right">Right</button>
+      <button type="button" data-act="ccw">Rotate left</button>
+      <button type="button" data-act="cw">Rotate right</button>
+      <button type="button" data-act="soft">Down</button>
+      <button type="button" data-act="drop">Drop</button>
+      <button type="button" data-act="hold">Hold</button>
+    </div>
+    <p class="help">
+      <kbd>←</kbd> <kbd>→</kbd> move
+      <kbd>↑</kbd> <kbd>X</kbd> rotate right
+      <kbd>Z</kbd> rotate left
+      <kbd>↓</kbd> soft drop
+      <kbd>Space</kbd> hard drop
+      <kbd>C</kbd> hold
+      <kbd>P</kbd> pause
+      <kbd>M</kbd> sound
+      <kbd>R</kbd> restart
+    </p>
+  </main>
+  <script src="engine.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
